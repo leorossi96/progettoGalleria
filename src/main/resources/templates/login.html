@@ -19,7 +19,7 @@
 		</div>
 <div sec:authorize="!isAuthenticated()">
 	<h1>Login amministratore</h1>
-		<form action="#" th:action="${/login}" method="post">
+		<form action="#" th:action="@{/login}" method="post">
 			<p>
 				Username :<input type="text" name="username"
 					placeholder="Enter Username" />

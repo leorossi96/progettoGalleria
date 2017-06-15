@@ -18,6 +18,11 @@
 			<input type="submit" value="cancella"/>
 			</form>
 			</div>
+			<div sec:authorize="isAuthenticated()">
+			<a href="/inserimento">Inserisci un quadro alla galleria</a>
+			</div>
+			
+			
 		</li>
 	</ul>
 </body>

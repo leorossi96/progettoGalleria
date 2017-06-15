@@ -27,8 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.jdbcAuthentication().dataSource(dataSource)
 		
 		.passwordEncoder(new BCryptPasswordEncoder())
-		.usersByUsernameQuery("SELECT username,password,1 FROM users where username=?")
-		.authoritiesByUsernameQuery("SELECT username,authority FROM authorities where username=?");
+		.usersByUsernameQuery("SELECT username,password,1 FROM amministratore where username=?");
 	}
 
    @Override

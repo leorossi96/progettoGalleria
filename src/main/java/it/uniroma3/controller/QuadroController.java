@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.uniroma3.model.Quadro;
@@ -19,10 +20,16 @@ public class QuadroController {
 	QuadroService service;
 	
 	@GetMapping(value="/quadri")
-	public String paginaLista(Model model){
+	public String listaQuadri(Model model){
 		List<Quadro> quadri = service.getQuadri();
 		model.addAttribute("quadri",quadri);
 		return "quadri";
+	}
+	
+	@PostMapping(value="/quadro")
+	public String addQuadro(){
+		return null;
+	
 	}
 	
 	
