@@ -16,7 +16,9 @@ import it.uniroma3.service.QuadroService;
 	@Controller
 	public class MainController{
 
-		
+		@Autowired
+		private QuadroService quadroService; 
+	
 		@RequestMapping(value = "/")//tutte le richieste http che hanno url="/" sono mappate verso il metodo index()
 		public String index(){
 			return "index";
@@ -39,14 +41,20 @@ import it.uniroma3.service.QuadroService;
 		}
 		
 		//Lista di quadri
-		
-		@Autowired
-		private QuadroService quadroService;
-		
 		@GetMapping(value="/quadri")
 		public String showForm(Model model){
 			List<Quadro> quadri = (List<Quadro>) quadroService.findAll(); 
-			//model.addAttribute("quadri",quadri);
+			model.addAttribute("quadri",quadri);
 			return "quadri";
 		}
+		
+//		@Autowired
+//		private QuadroService quadroService;
+//		
+//		@GetMapping(value="/quadri")
+//		public String showForm(Model model){
+//			List<Quadro> quadri = (List<Quadro>) quadroService.findAll(); 
+//			model.addAttribute("quadri",quadri);
+//			return "quadri";
+//		}
 	}

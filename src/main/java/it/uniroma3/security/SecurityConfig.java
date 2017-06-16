@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
 		.authorizeRequests()
-		.antMatchers("/").permitAll()
+		.antMatchers("/","/quadri").permitAll()
 			.antMatchers("/inserimento").access("hasAuthority('ADMIN')")
 			.anyRequest().authenticated()
 		.and()
