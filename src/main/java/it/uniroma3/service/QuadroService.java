@@ -15,22 +15,21 @@ import it.uniroma3.repository.QuadroRepository;
 public class QuadroService {
 
 	@Autowired
-	private QuadroRepository repository;
+    private QuadroRepository quadroRepository; 
 
-	public QuadroService() {
-		
-	}
-	
-	public void inserisciQuadro(Quadro quadro) {
-		repository.save(quadro);
-	}
-	
-	public Quadro getOneQuadro(Long id) {
-		Quadro quadro = repository.findOne(id);
-		return quadro;
+    public Iterable<Quadro> findAll() {
+        return this.quadroRepository.findAll();
+    }
+
+    @Transactional
+    public void add(final Quadro quadro) {
+        this.quadroRepository.save(quadro);
+    }
+
+	public Quadro findbyId(Long id) {
+		return this.quadroRepository.findOne(id);
 	}
 
-	public List<Quadro> getQuadri() {
-		return repository.findAll();
-	}
+	
+	
 	}

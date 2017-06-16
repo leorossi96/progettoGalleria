@@ -19,7 +19,7 @@
 		</div>
 <div sec:authorize="!isAuthenticated()">
 	<h1>Login amministratore</h1>
-		<form action="#" th:action="@{/login}" method="post">
+		<form action="#" th:action="@{/quadri}" method="post">
 			<p>
 				Username :<input type="text" name="username"
 					placeholder="Enter Username" />
@@ -28,11 +28,11 @@
 				Password :<input type="password" name="password"
 					placeholder="Enter Password" />
 			</p>
-			<span th:if="${param.loggedout}" style="font-weight: bold" id = "logout">Logout effettuato, torna alla <a href="${/index}">home</a></span>
-            <span th:if="${param.error}" style="font-weight: bold" id="error">Username e/o Password invalidi</span>
+			<span th:if="@{param.loggedout}" style="font-weight: bold" id = "logout">Logout effettuato, torna alla <a href="@{/index}">home</a></span>
+            <span th:if="@{param.error}" style="font-weight: bold" id="error">Username e/o Password invalidi</span>
 			<input type="submit" value="Login" />
 			</form>
 	</div>
-	<a href="quadri">Lista Quadri</a>
+	<a href="/quadri">Lista Quadri</a>
 </body>
 </html>

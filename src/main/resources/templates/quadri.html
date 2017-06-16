@@ -6,24 +6,20 @@
 </head>
 <body>
 <h1>Questi sono i quadri presenti nella galleria:</h1>
-<ul>
+<!-- <ul>
 		<li th:each="quadro : ${quadri}">
-			<a th:href="quadro" th:text="${quadro.titolo}"></a>
+			<a th:href="@{/dettagli(id=${quadro.id})}" th:text="${quadro.titolo}"></a>
 			
-			<div sec:authorize="isAuthenticated()">
-			<form th:action="${/modifica}" method="post">
+			 <div sec:authorize="isAuthenticated()">
+			<form th:action="@{/modifica}" method="post">
 			<input type="submit" value="modifica"/>
 			</form>
 			<form th:action="${/cancella}" method="post">
 			<input type="submit" value="cancella"/>
 			</form>
-			</div>
-			<div sec:authorize="isAuthenticated()">
-			<a href="/inserimento">Inserisci un quadro alla galleria</a>
-			</div>
 			
-			
+			</div> 
 		</li>
-	</ul>
+	</ul> -->
 </body>
 </html>
