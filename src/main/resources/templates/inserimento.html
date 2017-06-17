@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Login Page</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<title>Inserimento quadro</title>
 </head>
 <body>
-	<a href="">clicca qui per inserire quadro</a>
+	<div>
+		<form action="#" th:action = "@{/inserimento}" th:object = "${quadro}" method = "POST">
+			<h1>Inserire i dati del quadro:</h1>
+			<div>Titolo : <input type = "text" th:field = "*{titolo}"/> 
+				<span th:if="${#fields.hasErrors('titolo')}" th:errors = "*{titolo}">Error</span> 
+			</div>
+			<div>Anno : <input type = "text" th:field = "*{anno}"/> 
+				<span th:if="${#fields.hasErrors('anno')}" th:errors = "*{anno}">Error</span>
+			</div>
+			<div>Tecnica : <input type = "text" th:field = "*{tecnica}"/> 
+				<span th:if="${#fields.hasErrors('tecnica')}" th:errors = "*{tecnica}">Error</span>
+			</div>
+			<div>Dimensioni : <input type = "text" th:field = "*{dimensioni}"/> 
+				<span th:if="${#fields.hasErrors('dimensioni')}" th:errors = "*{dimensioni}">Error</span>
+			</div>
+			<div><input type="checkbox" name="inserisciAutore" id="inserisciAutore"/></div>
+			<div >
+				<select name = "autoriEsistenti" id="autoUpdate" class="autoUpdate">
+					<option value="" th:disabled = "true" th:selected="true">Seleziona un autore...</option>
+					<option th:each="autore : ${autori}" th:text = "${autore.nome} + ' ' + ${autore.cognome}" th:value = "${autore.id}"/>
+				</select>
+			</div>
+				
+			<span><button type = "submit">Inserisci Dati Quadro</button></span>
+		</form>
+		<form action = "/" method = "GET" style = "margin-top:10px;">
+				<input type ="submit" value = "Torna alla home!"/>
+		</form>
+	</div>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuovo Quadro</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+    <body>
+        <form action="#" th:action="@{/inserimentoQuadro}" th:object="${quadro}" method="post">
+            <div>
+                <div>
+                    <span>Titolo : </span>
+                    <span><input type="text" th:field="*{titolo}" placeholder="inserire titolo"/></span>
+                    <span th:if="${#fields.hasErrors('titolo')}">Errore inserimento titolo</span>
+                </div>
+                <div>
+                    <span>Anno : </span>
+                    <span><input type="text" th:field="*{anno}" placeholder="inserire anno"/></span>
+                    <span th:if="${#fields.hasErrors('anno')}">Errore inserimento anno</span>
+                </div>
+                <div>
+                    <span>Tecnica : </span>
+                    <span><input type="text" th:field="*{tecnica}" placeholder="inserire tecnica"/></span>
+                    <span th:if="${#fields.hasErrors('tecnica')}">Errore inserimento tecnica</span>
+                </div>
+				
+                <div>
+                    <span>Autore : </span>
+                <select name = "autoriEsistenti" id="autoUpdate" class="autoUpdate">
+					<option value="" th:disabled = "true" th:selected="true">Seleziona un autore...</option>
+					<option th:each="autore : ${autori}" th:text = "${autore.nome} + ' ' + ${autore.cognome}" th:value = "${autore.id}"/>
+				</select>
+				<a th:href="@{/inserimentoAutore}">Inserisci un nuovo autore</a>
+                </div>
+                <div>
+                <input type="submit" value="Inserisci nuovo quadro"/>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

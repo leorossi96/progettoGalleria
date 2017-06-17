@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.model.Autore;
 import it.uniroma3.model.Quadro;
 import it.uniroma3.repository.QuadroRepository;
 
@@ -14,22 +15,44 @@ import it.uniroma3.repository.QuadroRepository;
 @Transactional
 public class QuadroService {
 
+
 	@Autowired
-    private QuadroRepository quadroRepository; 
+	private QuadroRepository repository;
 
-    public Iterable<Quadro> findAll() {
-        return this.quadroRepository.findAll();
-    }
-
-    @Transactional
-    public void add(final Quadro quadro) {
-        this.quadroRepository.save(quadro);
-    }
-
-	public Quadro findbyId(Long id) {
-		return this.quadroRepository.findOne(id);
+	public QuadroService() {
+		
+	}
+	
+	public void inserisciQuadro(Quadro quadro) {
+		repository.save(quadro);
 	}
 
-	
-	
+	public List<Quadro> getQuadri() {
+		List<Quadro> quadri = repository.findAll();
+		return quadri;
 	}
+	
+	public Quadro getOneQuadro(Long id) {
+		Quadro quadro = repository.findOne(id);
+		return quadro;
+	}
+
+	public void delete(Quadro q){
+		repository.delete(q);
+	}
+	
+	public List<Quadro> getQuadriByAutore(Autore autore){
+		List<Quadro> quadri = repository.findByAutore(autore);
+		return quadri;
+	}
+	
+	public Quadro getQuadroByTitolo(String titolo){
+		Quadro quadro = repository.findByTitolo(titolo);
+		return quadro;
+	}
+	
+	public List<Quadro> getQuadroByTecnica(String tecnica){
+		List<Quadro> quadri = repository.findByTecnica(tecnica);
+		return quadri;
+	}
+}

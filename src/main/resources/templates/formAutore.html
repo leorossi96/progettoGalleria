@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuovo Autore</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+    <body>
+        <form action="#" th:action="@{/inserimentoAutore}" th:object="${autore}" method="post">
+            <div>
+                <div>
+                    <span>Nome : </span>
+                    <span><input type="text" th:field="*{nome}" placeholder="inserire nome" /></span>
+                    <span th:if="${#fields.hasErrors('nome')}">Errore inserimento nome</span>
+                </div>
+                <div>
+                    <span>Cognome : </span>
+                    <span><input type="text" th:field="*{cognome}" placeholder="inserire cognome"/></span>
+                    <span th:if="${#fields.hasErrors('cognome')}">Errore inserimento cognome</span>
+                </div>
+                <div>
+                    <span>Nazionalità : </span>
+                    <span><input type="text" th:field="*{nazionalità}" placeholder="inserire nazionalità"/></span>
+                    <span th:if="${#fields.hasErrors('nazionalità')}">Errore inserimento nazionalità</span>
+                </div>
+                <div>
+                    <span>Data di nascita : </span>
+                    <span><input type="text" th:field="*{dataNascita}"  placeholder="inserire data di nascita"/></span>
+                    <span th:if="${#fields.hasErrors('dataNascita')}">Errore inserimento data di nascita</span>
+                </div>
+                <div>
+                    <span>Data di morte : </span>
+                    <span><input type="text" th:field="*{dataMorte}"  placeholder="inserire data di morte"/></span>
+                    <span th:if="${#fields.hasErrors('dataMorte')}">Errore inserimento data di morte</span>
+                </div>
+                </div>
+                <div>
+                <input type="submit" value="Inserisci nuovo autore"/>
+                </div>
+        </form>
+    </body>
+</html>
