@@ -6,11 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -23,10 +20,10 @@ public class Autore{
 private Long id;
 
 @NotNull
-private String firstName;
+private String nome;
 
 @NotNull
-private String lastName;
+private String cognome;
 
 @NotNull
 private String nazionalità;
@@ -42,8 +39,8 @@ private Date dataMorte;
 protected Autore(){}
 
 public Autore (String firstName, String lastName, String nazionalità, Date dataNascita, Date dataMorte){
-	this.firstName=firstName;
-	this.lastName=lastName;
+	this.nome=firstName;
+	this.cognome=lastName;
 	this.nazionalità=nazionalità;
 	this.dataNascita=dataNascita;
 	this.dataMorte=dataMorte;
@@ -57,20 +54,20 @@ public void setId(Long id) {
 	this.id = id;
 }
 
-public String getFirstName() {
-	return firstName;
+public String getNome() {
+	return nome;
 }
 
-public void setFirstName(String firstName) {
-	this.firstName = firstName;
+public void setNome(String nome) {
+	this.nome = nome;
 }
 
-public String getLastName() {
-	return lastName;
+public String getCognome() {
+	return cognome;
 }
 
-public void setLastName(String lastName) {
-	this.lastName = lastName;
+public void setCognome(String cognome) {
+	this.cognome = cognome;
 }
 
 public String getNazionalità() {
