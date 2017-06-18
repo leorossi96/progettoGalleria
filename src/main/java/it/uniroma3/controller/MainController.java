@@ -40,13 +40,7 @@ import it.uniroma3.service.QuadroService;
 			return "login";
 		}
 		
-		//Lista di quadri
-		@GetMapping(value="/quadri")
-		public String showForm(Model model){
-			List<Quadro> quadri = (List<Quadro>) quadroService.getQuadri(); 
-			model.addAttribute("quadri",quadri);
-			return "quadri";
-		}
+		
 		
 //		@Autowired
 //		private QuadroService quadroService;
