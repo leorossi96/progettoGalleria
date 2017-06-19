@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Nuovo Quadro</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -76,6 +76,17 @@
                 </div>
             </div>
         </form>
+        <form th:action="@{/}" th:method="get">
+	<input type="submit" value="Torna alla pagina iniziale"/>
+	</form>
+	<form th:action="@{/quadri}" th:method="get">
+	<input type="submit" value="Torna alla lista delle opere"/>
+	</form>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        </div>
        </div>
     </body>
 </html>
