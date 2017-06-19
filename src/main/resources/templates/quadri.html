@@ -8,11 +8,7 @@
 <h1>Questi sono i quadri presenti nella galleria:</h1>
 <ul>
 		<li th:each="quadro : ${quadri}">
-			<a th:href="@{/dettagliQuadro}" th:text="${quadro.titolo}"></a>
-			<form th:action="@{/dettagliQuadro}" method="get">
-            <input id="quadroDaMostrare" name="quadroDaMostrare" type="hidden" value="${quadro.id}"/>
-			<input type="submit" value="Dettagli completi"/>
-			</form>
+			<a th:href="@{/dettagliQuadro(id=${quadro.id})}" th:text="${quadro.titolo}"></a>
 			<div  sec:authorize="${hasRole('ROLE_ADMIN')}" >
 			<form th:action="@{/modifica}" method="get">
 			<input type="submit" value="modifica"/>

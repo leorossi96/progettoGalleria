@@ -5,28 +5,28 @@
 <title th:text = "'Dettagli di: ' + ${quadro.titolo}">Insert title here</title>
 </head>
 <body>
-	<h1 th:text = "'Dettagli di: ' + ${quadro.titolo}">Quadro</h1>
+	<h1 th:text = "${quadro.titolo}+' di '+ ${quadro.autore.nome} + ' ' + ${quadro.autore.nome}">Quadro</h1>
 	<ul>
 		<li th:text = "'Anno di creazione: ' + ${quadro.anno}"></li>
 		<li th:text = "'Tecnica di creazione: ' + ${quadro.tecnica}"></li>
-		<li th:text = "'Dimensioni del quadro: ' + ${quadro.dimensioni}"></li>
+		<li th:text = "'Dimensioni : ' + ${quadro.dimensione}"></li>
 	</ul>
-	<h3>Dettagli Autore:</h3>
+	<h2>Dettagli Autore:</h2>
 	<ul>
-		<li th:text = "'Nome Autore: ' + ${quadro.autore.nome}"></li>
-		<li th:text = "'Cognome Autore: ' + ${quadro.autore.cognome}"></li>
-		<li th:text = "'Nazionalita Autore: ' + ${quadro.autore.nazionalita}"></li>
-		<li th:text = "'Data di nascita: ' + ${quadro.autore.dob}"></li>
-		<li th:switch ="${quadro.autore.dod == null}">
-			<span th:case = "false" th:text = "'Data di morte: ' + ${quadro.autore.dod}"></span>
-			<span th:case = "true" th:text = "'Data di morte: '"></span>
+		<li th:text = "'Nome : ' + ${quadro.autore.nome}"></li>
+		<li th:text = "'Cognome : ' + ${quadro.autore.cognome}"></li>
+		<li th:text = "'Nazionalità: ' + ${quadro.autore.nazionalita}"></li>
+		<li th:text = "'Data di nascita: ' + ${quadro.autore.dataNascita}"></li>
+		<li th:switch ="${quadro.autore.dataMorte == null}">
+			<span th:case = "false" th:text = "'Data di morte: ' + ${quadro.autore.dataMorte}"></span>
+			<span th:case = "true"></span>
 		</li>
 	</ul>
-	<form>
-		<button formaction = "/" type = "submit" formmethod = "GET">Torna alla home!</button>
+	<form th:action="@{/}" th:method="get">
+	<input type="submit" value="Torna alla pagina iniziale"/>
 	</form>
-	<form>
-		<button formaction = "/lista" type = "submit" formmethod = "GET">Torna alla lista!</button>
+	<form th:action="@{/quadri}" th:method="get">
+	<input type="submit" value="Torna alla lista delle opere"/>
 	</form>
 </body>
 </html>

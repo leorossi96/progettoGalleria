@@ -26,22 +26,21 @@ private String nome;
 private String cognome;
 
 @NotNull
-private String nazionalità;
+private String nazionalita;
 
 @NotNull
 @DateTimeFormat(pattern = "dd/MM/yyyy")
 private Date dataNascita;
 
-@NotNull
 @DateTimeFormat(pattern = "dd/MM/yyyy")
 private Date dataMorte;
 
 protected Autore(){}
 
-public Autore (String firstName, String lastName, String nazionalità, Date dataNascita, Date dataMorte){
+public Autore (String firstName, String lastName, String nazionalita, Date dataNascita, Date dataMorte){
 	this.nome=firstName;
 	this.cognome=lastName;
-	this.nazionalità=nazionalità;
+	this.nazionalita=nazionalita;
 	this.dataNascita=dataNascita;
 	this.dataMorte=dataMorte;
 }
@@ -70,12 +69,12 @@ public void setCognome(String cognome) {
 	this.cognome = cognome;
 }
 
-public String getNazionalità() {
-	return nazionalità;
+public String getNazionalita() {
+	return nazionalita;
 }
 
-public void setNazionalità(String nazionalità) {
-	this.nazionalità = nazionalità;
+public void setNazionalita(String nazionalità) {
+	this.nazionalita = nazionalità;
 }
 
 public Date getDataNascita() {

@@ -120,7 +120,7 @@ public class QuadroController {
 		return "dettagliQuadro";
 	}
 
-	//indirizzo alla pagina con la form di inserimento dell'autore
+	//Indirizzo alla pagina con la form di inserimento dell'autore
 	@GetMapping(value="/inserimentoAutore")
 	public String formInserimento(Autore autore){
 		return "formAutore";
@@ -142,12 +142,12 @@ public class QuadroController {
 			model.addAttribute("quadro", quadro);
 			model.addAttribute("messaggioNuovoAutore", "Quadro inserito con successo"); //DA MOSTRARE
 			autoreService.inserisciAutore(autore);
-			return "formQuadro";
+			return formInserimento( quadro, model);
 		}
 		}
 
 		@RequestMapping(value="/dettagliQuadro")
-		public String dettagli(@RequestParam("quadroDaMostrare") Long quadroId, Model model){
+		public String dettagli(@RequestParam("id") Long quadroId, Model model){
 			Quadro quadro = quadroService.getOneQuadro(quadroId);
 			model.addAttribute("quadro", quadro);
 			return "dettagliQuadro";
