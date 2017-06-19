@@ -159,7 +159,6 @@ public class QuadroController {
 			for (FieldError error : errors ) {
 				System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
 			}
-			System.out.println("!!!!!!!! BINDING ERROR !!!!!!!!");
 			return "formAutore";
 		}
 		else{
