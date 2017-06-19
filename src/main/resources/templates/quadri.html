@@ -25,14 +25,8 @@
 		<li th:each="quadro : ${quadri}">
 			<a th:href="@{/dettagliQuadro(id=${quadro.id})}" th:text="${quadro.titolo}"></a>
 			<div  sec:authorize="${hasRole('ROLE_ADMIN')}" >
-			<form th:action="@{/modifica}" method="get">
-			<input type="submit" value="modifica"/>
- 			<input id="quadroDaModificare" name="quadroDaModificare" type="hidden" value="${quadro.id}"/>
-			</form>
-			<form th:action="@{/cancella}" method="post">
-			<input id="quadro" name="quadroDaCancellare" type="hidden" value="${quadro.id}"/> 
-			<input type="submit" value="cancella"/>
-			</form>
+			<a th:href="@{/modifica(quadroDaModificare=${quadro.id})}" >Modifica </a> 
+			<a th:href="@{/cancella(quadroDaCancellare=${quadro.id})}" >Cancella </a> 	
 			</div>
 			</li>
 			</ul>

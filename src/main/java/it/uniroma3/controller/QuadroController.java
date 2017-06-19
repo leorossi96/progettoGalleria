@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.model.Autore;
@@ -121,15 +122,13 @@ public class QuadroController {
 		return "quadri";
 	}
 
-	@GetMapping(value="/modifica")
-	public String formPerModifica(@RequestParam("quadroDaModificare") Long quadroId, Model model){
-		Quadro q = quadroService.getOneQuadro(quadroId);
-		model.addAttribute("quadro", q);
-		model.addAttribute("modifica", true);
-		return "formQuadro";
-
-
-
+	
+	@RequestMapping(value="/modifica", method = RequestMethod.GET)
+	public String dettagliQuadro(@ModelAttribute("quadroDaModificare") Long quadroId, Model model){
+		Quadro quadro = quadroService.getOneQuadro(quadroId);
+		model.addAttribute("autori", autoreService.getAutori());
+		model.addAttribute("quadro", quadro);
+		return "/formQuadro";
 	}
 
 	//Form per modificare un quadro nel db

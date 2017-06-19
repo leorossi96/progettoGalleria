@@ -22,7 +22,6 @@ public class Quadro{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="quadro_id")
 	private Long id;
 	
 	
@@ -43,7 +42,7 @@ public class Quadro{
 	@NotEmpty
 	private String dimensione;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	private Autore autore;
 	
 	
