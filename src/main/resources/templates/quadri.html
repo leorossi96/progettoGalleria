@@ -1,42 +1,57 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><head>
-<meta charset="UTF-8"/>
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Quadri nella galleria</title>
 </head>
 <body>
-<h1>Questi sono i quadri presenti nella galleria:</h1>
-<form th:action="@{/quadriPerAutore}" th:method="get">
-<select name = "autoreScelto" id="autoUpdate" class="autoUpdate">
-					<option value="" th:disabled = "true" th:selected="true" >Seleziona un autore...</option>
-					<option th:each="autore : ${autori}" th:text = "${autore.nome} + ' ' + ${autore.cognome}" th:value = "${autore.id}"/>
-				</select>
-				<input type="submit" value="Trova quadri di questo autore"/>
-</form>
-<form th:action="@{/quadriPerAnno}" th:method="get">
-<input type="text" name="anno" placeholder="inserisci l'anno per cercare i quadri"/>
-<input type="submit" value="Trova quadri di questo anno"/>
-</form>
-<form th:action="@{/quadriPerTecnica}" th:method="get">
-<input type="text" name="tecnica" placeholder="inserisci la tecnica per cercare i quadri"/>
-<input type="submit" value="Trova quadri con questa tecnica"/>
-</form>
-<ul>
-		<li th:each="quadro : ${quadri}">
-			<a th:href="@{/dettagliQuadro(id=${quadro.id})}" th:text="${quadro.titolo}"></a>
-			<div  sec:authorize="${hasRole('ROLE_ADMIN')}" >
-			<a th:href="@{/modifica(quadroDaModificare=${quadro.id})}" >Modifica </a> 
-			<a th:href="@{/cancella(quadroDaCancellare=${quadro.id})}" >Cancella </a> 	
-			</div>
+	<h1>Questi sono i quadri presenti nella galleria:</h1>
+
+
+<div sec:authorize="isAuthenticated()">
+  This content is only shown to authenticated users.
+</div>
+
+
+	<form th:action="@{/quadriPerAutore}" th:method="get">
+		<select name="autoreScelto" id="autoUpdate" class="autoUpdate">
+			<option value="" th:disabled="true" th:selected="true">Seleziona
+				un autore...</option>
+			<option th:each="autore : ${autori}"
+				th:text="${autore.nome} + ' ' + ${autore.cognome}"
+				th:value="${autore.id}" />
+		</select> <input type="submit" value="Trova quadri di questo autore" />
+	</form>
+	<form th:action="@{/quadriPerAnno}" th:method="get">
+		<input type="text" name="anno"
+			placeholder="inserisci l'anno per cercare i quadri" /> <input
+			type="submit" value="Trova quadri di questo anno" />
+	</form>
+	<form th:action="@{/quadriPerTecnica}" th:method="get">
+		<input type="text" name="tecnica"
+			placeholder="inserisci la tecnica per cercare i quadri" /> <input
+			type="submit" value="Trova quadri con questa tecnica" />
+	</form>
+	<ul>
+		<li th:each="quadro : ${quadri}"><a
+			th:href="@{/dettagliQuadro(id=${quadro.id})}"
+			th:text="${quadro.titolo}"></a>
+			<div sec:authorize="isAuthenticated()">
+					<a th:href="@{/modifica(quadroDaModificare=${quadro.id})}">Modifica</a>
+					 <a th:href="@{/cancella(quadroDaCancellare=${quadro.id})}">Cancella</a>
+					 </div>
 			</li>
-			</ul>
-			<div  sec:authorize="${hasRole('ROLE_ADMIN')}" > 
-			<a href="/inserimentoQuadro">Inserisci un quadro alla galleria</a>
-			</div> 
-			<div sec:authorize="hasRole('ROLE_ADMIN')">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-        </div>
+	</ul>
+	<div sec:authorize="isAuthenticated()">
+		<a href="/inserimentoQuadro">Inserisci un quadro alla galleria</a>
+		
+	
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" />
+		</form>
+		</div>
+	
 </body>
 </html>
