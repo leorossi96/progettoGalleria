@@ -147,7 +147,9 @@ public class QuadroController {
 		}
 
 		@RequestMapping(value="/dettagliQuadro")
-		public String dettagli(@ModelAttribute Quadro quadro){
+		public String dettagli(@RequestParam("quadroDaMostrare") Long quadroId, Model model){
+			Quadro quadro = quadroService.getOneQuadro(quadroId);
+			model.addAttribute("quadro", quadro);
 			return "dettagliQuadro";
 		}
 

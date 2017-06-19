@@ -10,7 +10,7 @@
 		<li th:each="quadro : ${quadri}">
 			<a th:href="@{/dettagliQuadro}" th:text="${quadro.titolo}"></a>
 			<form th:action="@{/dettagliQuadro}" method="get">
-			<input type="hidden" th:value="${quadro}" name="quadro"/>
+            <input id="quadroDaMostrare" name="quadroDaMostrare" type="hidden" value="${quadro.id}"/>
 			<input type="submit" value="Dettagli completi"/>
 			</form>
 			<div  sec:authorize="${hasRole('ROLE_ADMIN')}" >
