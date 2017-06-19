@@ -5,7 +5,7 @@
 <title th:text = "'Dettagli di: ' + ${quadro.titolo}">Insert title here</title>
 </head>
 <body>
-	<h1 th:text = "${quadro.titolo}+' di '+ ${quadro.autore.nome} + ' ' + ${quadro.autore.nome}">Quadro</h1>
+	<h1 th:text = "${quadro.titolo}+' di '+ ${quadro.autore.nome} + ' ' + ${quadro.autore.cognome}">Quadro</h1>
 	<ul>
 		<li th:text = "'Anno di creazione: ' + ${quadro.anno}"></li>
 		<li th:text = "'Tecnica di creazione: ' + ${quadro.tecnica}"></li>
