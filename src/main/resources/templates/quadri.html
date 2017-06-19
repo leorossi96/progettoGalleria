@@ -6,16 +6,31 @@
 </head>
 <body>
 <h1>Questi sono i quadri presenti nella galleria:</h1>
+<form th:action="@{/quadriPerAutore}" th:method="get">
+<select name = "autoreScelto" id="autoUpdate" class="autoUpdate">
+					<option value="" th:disabled = "true" th:selected="true" >Seleziona un autore...</option>
+					<option th:each="autore : ${autori}" th:text = "${autore.nome} + ' ' + ${autore.cognome}" th:value = "${autore.id}"/>
+				</select>
+				<input type="submit" value="Trova quadri di questo autore"/>
+</form>
+<form th:action="@{/quadriPerAnno}" th:method="get">
+<input type="text" name="anno" placeholder="inserisci l'anno per cercare i quadri"/>
+<input type="submit" value="Trova quadri di questo anno"/>
+</form>
+<form th:action="@{/quadriPerTecnica}" th:method="get">
+<input type="text" name="tecnica" placeholder="inserisci la tecnica per cercare i quadri"/>
+<input type="submit" value="Trova quadri con questa tecnica"/>
+</form>
 <ul>
 		<li th:each="quadro : ${quadri}">
 			<a th:href="@{/dettagliQuadro(id=${quadro.id})}" th:text="${quadro.titolo}"></a>
 			<div  sec:authorize="${hasRole('ROLE_ADMIN')}" >
-			<form th:action="@{/modifica}" method="get">
+			<form th:action="@{/modifica(quadroDaModificare=${quadro.id})}" method="get">
 			<input type="submit" value="modifica"/>
-            <input id="quadroDaModificare" name="quadroDaModificare" type="hidden" value="${quadro.id}"/>
+            <!--   <input id="quadroDaModificare" name="quadroDaModificare" type="hidden" value="${quadro.id}"/> -->
 			</form>
-			<form th:action="@{/cancella}" method="post">
-			<input id="quadro" name="quadroDaCancellare" type="hidden" value="${quadro.id}"/>
+			<form th:action="@{/cancella(quadroDaCancellare=${quadro.id})}" method="post">
+			<!-- <input id="quadro" name="quadroDaCancellare" type="hidden" value="${quadro.id}"/> -->
 			<input type="submit" value="cancella"/>
 			</form>
 			</div>

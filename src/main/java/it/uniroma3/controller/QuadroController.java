@@ -33,7 +33,9 @@ public class QuadroController {
 	//aggiungo al model il parametro quadri con i quadri presenti nel db e vado alla pagina /quadri
 	@GetMapping(value="/quadri")
 	public String listaQuadri(Model model){
+		List<Autore> autori = autoreService.getAutori();
 		List<Quadro> quadri = quadroService.getQuadri();
+		model.addAttribute("autori",autori);
 		model.addAttribute("quadri",quadri);
 		return "quadri";
 	}
@@ -56,12 +58,6 @@ public class QuadroController {
 			for (FieldError error : errors ) {
 				System.out.println (error.getObjectName() + " - " + error.getRejectedValue()+ " - " + error.getDefaultMessage());
 			}
-			System.out.println(quadro.getTitolo());
-			System.out.println(quadro.getAutore().toString());
-			System.out.println(quadro.getAnno());
-			System.out.println(quadro.getDimensione());
-			System.out.println(quadro.getTecnica());
-			System.out.println(quadro.toString());
 			List<Autore> autori = autoreService.getAutori();
 			model.addAttribute("autori", autori);
 			model.addAttribute("quadro", quadro);
@@ -83,7 +79,37 @@ public class QuadroController {
 			model.addAttribute("messaggio", "Seleziona un autore esistente o inseriscine uno nuovo"); // DA MOSTRARE
 			return "formQuadro";
 		}
+			
+		}
+	
+	@GetMapping(value="/quadriPerAutore")
+	public String quadriPerAutore( Model model, @RequestParam(value="autoreScelto") Long autoreId){
+		Autore autoreScelto = autoreService.getOneAutore(autoreId);
+		List<Quadro> quadriPerAutore = quadroService.getQuadriByAutore(autoreScelto);
+		model.addAttribute("quadri", quadriPerAutore);
+		List<Autore> autori = autoreService.getAutori();
+		model.addAttribute("autori", autori);
+		return "quadri";
 	}
+	
+	@GetMapping(value="/quadriPerTecnica")
+	public String quadriPerTecnica( Model model, @RequestParam(value="tecnica") String tecnica){
+		List<Quadro> quadriPerTecnica = quadroService.getQuadroByTecnica(tecnica);
+		model.addAttribute("quadri", quadriPerTecnica);
+		List<Autore> autori = autoreService.getAutori();
+		model.addAttribute("autori", autori);
+		return "quadri";
+	}
+	
+	@GetMapping(value="/quadriPerAnno")
+	public String quadriPerAnno( Model model, @RequestParam(value="anno") Integer anno){
+		List<Quadro> quadriPerAnno = quadroService.getQuadroByAnno(anno);
+		model.addAttribute("quadri", quadriPerAnno);
+		List<Autore> autori = autoreService.getAutori();
+		model.addAttribute("autori", autori);
+		return "quadri";
+	}
+
 
 
 

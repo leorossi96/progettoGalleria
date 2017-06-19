@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
     <body>
-   <!--  <div th:if="${modifica}">
+   <div th:if="${modifica!=null}">
      <form action="#" th:action="@{/modifica}" th:object="${quadroModificato}" method="post">
             <div>
             <input type="hidden" th:value="*{id}"/>
@@ -37,7 +37,8 @@
                 </div>
             </div>
         </form>
-    </div> -->
+    </div> 
+     <div th:unless="${modifica!=null}">
         <form action="#" th:action="@{/inserimentoQuadro}" th:object="${quadro}" method="post">
             <div>
                 <div>
@@ -75,5 +76,6 @@
                 </div>
             </div>
         </form>
+       </div>
     </body>
 </html>

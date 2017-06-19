@@ -66,4 +66,9 @@ public class QuadroService {
 		List<Quadro> quadri = repository.findByTecnica(tecnica);
 		return quadri;
 	}
+	
+	public List<Quadro> getQuadroByAnno(Integer anno){
+		List<Quadro> quadri = repository.findByAnno(anno);
+		return quadri;
+	}
 }
