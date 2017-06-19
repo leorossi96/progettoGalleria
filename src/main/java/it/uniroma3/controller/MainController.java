@@ -27,18 +27,23 @@ import it.uniroma3.service.QuadroService;
 		public String enter(){
 			return "login";
 		}
+		@RequestMapping(value="/hello")
+		public String hello(){
+			return "hello";
+		}
 		@RequestMapping(value="/login")
 		public String login(){
 			return "login";
 		}
 		
-		// Login form with error
-		@RequestMapping("/login-error.html")
-		public String loginError(Model model) {
-			model.addAttribute("loginError", true);
-			return "login";
-		}
 		
+		
+		// Login form with error
+		  @RequestMapping("/login-error.html")
+		  public String loginError(Model model) {
+		    model.addAttribute("loginError", true);
+		    return "login";
+		  }
 		
 		
 //		@Autowired

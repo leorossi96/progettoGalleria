@@ -18,15 +18,15 @@ public class RuoliUtente {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Utente utente;
 	@NotBlank
-	private String ruoli;
+	private String ruolo;
 	private String username;
 	
 	public RuoliUtente(){
 		
 	}
 	
-	public RuoliUtente(String ruoli, Utente utente){
-		this.ruoli = ruoli;
+	public RuoliUtente(String ruolo, Utente utente){
+		this.ruolo = ruolo;
 		this.utente = utente;
 		this.username = utente.getUsername();
 	}
@@ -44,10 +44,10 @@ public class RuoliUtente {
 		this.utente = utente;
 	}
 	public String getRuoli() {
-		return ruoli;
+		return ruolo;
 	}
 	public void setRuoli(String ruoli) {
-		this.ruoli = ruoli;
+		this.ruolo = ruoli;
 	}
 	public String getUsername() {
 		return username;
