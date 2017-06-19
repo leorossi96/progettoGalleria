@@ -25,6 +25,9 @@ public class AutoreService {
 		repository.save(autore);
 	}
 
+	public Autore getOneAutore(Long id){
+		return repository.findOne(id);
+	}
 	public List<Autore> getAutori() {
 		List<Autore> autori = repository.findAll();
 		return autori;

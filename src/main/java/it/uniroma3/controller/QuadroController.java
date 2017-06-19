@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.model.Autore;
 import it.uniroma3.model.Quadro;
@@ -19,14 +22,14 @@ import it.uniroma3.service.AutoreService;
 
 @Controller
 public class QuadroController {
-	
-	
+
+
 	@Autowired
 	QuadroService quadroService;
-	
+
 	@Autowired
 	AutoreService autoreService;
-	
+
 	//aggiungo al model il parametro quadri con i quadri presenti nel db e vado alla pagina /quadri
 	@GetMapping(value="/quadri")
 	public String listaQuadri(Model model){
@@ -34,27 +37,122 @@ public class QuadroController {
 		model.addAttribute("quadri",quadri);
 		return "quadri";
 	}
-	
+
 	//indirizzo alla pagina con la form di inserimento del quadro
 	@GetMapping(value="/inserimentoQuadro")
-	public String formInserimento(Quadro quadro, Model model){
+	public String formInserimento(Quadro quadro,Model model){
+		model.addAttribute("quadro", quadro);
 		List<Autore> autori = autoreService.getAutori();
 		model.addAttribute("autori", autori);
 		return "formQuadro";
 	}
-	
+
 	//Aggiungo il quadro nel db e ritorno alla pagina della descrizione
 	@PostMapping(value="/inserimentoQuadro")
-	public String inserisciQuadroDellaForm(@Valid @ModelAttribute Quadro quadro, BindingResult bindingResult,Model model){
-		if (bindingResult.hasErrors()) {
-            return "form";
-        }
-		else{
-			model.addAttribute(quadro);
-			quadroService.inserisciQuadro(quadro);
+	public String inserisciQuadroDellaForm(@Valid @ModelAttribute Quadro quadro, BindingResult bindingResult,Model model, @RequestParam(value="autore", required=false) Long autoreId){
+		if (bindingResult.hasErrors() ) {
+
+			List<FieldError> errors = bindingResult.getFieldErrors();
+			for (FieldError error : errors ) {
+				System.out.println (error.getObjectName() + " - " + error.getRejectedValue()+ " - " + error.getDefaultMessage());
+			}
+			System.out.println(quadro.getTitolo());
+			System.out.println(quadro.getAutore().toString());
+			System.out.println(quadro.getAnno());
+			System.out.println(quadro.getDimensione());
+			System.out.println(quadro.getTecnica());
+			System.out.println(quadro.toString());
+			List<Autore> autori = autoreService.getAutori();
+			model.addAttribute("autori", autori);
+			model.addAttribute("quadro", quadro);
+			model.addAttribute("autore", autoreId);
+			return "formQuadro";
 		}
-		return "quadri";
+		else if (autoreService.getOneAutore(autoreId)!=null){
+			quadro.setAutore(autoreService.getOneAutore(autoreId));
+			model.addAttribute("quadro",quadro);
+			quadroService.inserisciQuadro(quadro);
+			model.addAttribute("quadri", quadroService.getQuadri());
+			model.addAttribute("messaggio", "Quadro inserito con successo"); //DA MOSTRARE
+			return "quadri";
+		}
+		else{
+			model.addAttribute("autori",autoreService.getAutori());
+			model.addAttribute("quadro", quadro);
+			model.addAttribute("autore", autoreId);
+			model.addAttribute("messaggio", "Seleziona un autore esistente o inseriscine uno nuovo"); // DA MOSTRARE
+			return "formQuadro";
+		}
 	}
 
 
-}
+
+	//elimina un quadro dal db
+	@RequestMapping(value="/cancella")
+	public String eliminaQuadro(@RequestParam("quadroDaCancellare") Long quadroId){
+		Quadro q = quadroService.getOneQuadro(quadroId);
+		quadroService.delete(q);
+		return "quadri";
+	}
+
+	@GetMapping(value="/modifica")
+	public String formPerModifica(@RequestParam("quadroDaModificare") Long quadroId, Model model){
+		Quadro q = quadroService.getOneQuadro(quadroId);
+		model.addAttribute("quadro", q);
+		model.addAttribute("modifica", true);
+		return "formQuadro";
+
+
+
+	}
+
+	//Form per modificare un quadro nel db
+	@PostMapping(value="/modifica")
+	public String modificaQuadro(@Valid @ModelAttribute Quadro quadroModificato, BindingResult bindingResult,Model model,@RequestParam("quadro") Long quadroId, @RequestParam("autoreScelto") Long autoreId){
+		if (bindingResult.hasErrors()){
+			return "quadri";
+		}
+		else{
+			model.addAttribute("quadro", quadroModificato);
+			Autore a = autoreService.getOneAutore(autoreId);
+			quadroService.modificaQuadro(quadroId, quadroModificato.getTitolo(), quadroModificato.getAnno(), a, quadroModificato.getDimensione(), quadroModificato.getTecnica());
+		}
+		return "dettagliQuadro";
+	}
+
+	//indirizzo alla pagina con la form di inserimento dell'autore
+	@GetMapping(value="/inserimentoAutore")
+	public String formInserimento(Autore autore){
+		return "formAutore";
+	}
+
+	//Aggiungo l'autore nel db e ritorno alla pagina della descrizione
+	@PostMapping(value="/inserimentoAutore")
+	public String inserisciQuadroDellaForm(@Valid @ModelAttribute Autore autore, BindingResult bindingResult, Model model, Quadro quadro){
+		if (bindingResult.hasErrors()) {
+			List<FieldError> errors = bindingResult.getFieldErrors();
+			for (FieldError error : errors ) {
+				System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+			}
+			System.out.println("!!!!!!!! BINDING ERROR !!!!!!!!");
+			return "formAutore";
+		}
+		else{
+			model.addAttribute(autore);
+			model.addAttribute("quadro", quadro);
+			model.addAttribute("messaggioNuovoAutore", "Quadro inserito con successo"); //DA MOSTRARE
+			autoreService.inserisciAutore(autore);
+			return "formQuadro";
+		}
+		}
+
+		@RequestMapping(value="/dettagliQuadro")
+		public String dettagli(@ModelAttribute Quadro quadro){
+			return "dettagliQuadro";
+		}
+
+
+
+
+
+	}

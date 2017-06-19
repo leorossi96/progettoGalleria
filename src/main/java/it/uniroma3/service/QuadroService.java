@@ -26,6 +26,17 @@ public class QuadroService {
 	public void inserisciQuadro(Quadro quadro) {
 		repository.save(quadro);
 	}
+	
+	public void modificaQuadro(Long id, String titolo, Integer anno, Autore autore, String dimensione, String tecnica){
+		Quadro q = this.getOneQuadro(id);
+//		this.delete(q);
+		q.setTitolo(titolo);
+		q.setAnno(anno);
+		q.setAutore(autore);
+		q.setDimensione(dimensione);
+		q.setTecnica(tecnica);
+		repository.save(q);
+	}
 
 	public List<Quadro> getQuadri() {
 		List<Quadro> quadri = repository.findAll();
