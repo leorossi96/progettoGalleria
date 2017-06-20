@@ -27,8 +27,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a th:href="@{/}"><span class="glyphicon glyphicon-home"></span>HOME</a></li>
         <li><a th:href="@{/quadri}"><span class="glyphicon glyphicon-th"></span>LISTA QUADRI</a></li>
-        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="@{/formQuadro}"><span class="glyphicon glyphicon-picture"></span>INSERIMENTO QUADRO</a></li>
-        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="@{/formAutore}"><span class="glyphicon glyphicon-pencil"></span>INSERIMENTO AUTORE</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoQuadro}"><span class="glyphicon glyphicon-picture"></span>INSERIMENTO QUADRO</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoAutore}"><span class="glyphicon glyphicon-pencil"></span>INSERIMENTO AUTORE</a></li>
       </ul>
     </div>
   </div>

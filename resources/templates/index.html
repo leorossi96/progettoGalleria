@@ -1,18 +1,28 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-      <meta charset="utf-8"/>
- 
+	xmlns:tiles="http://www.thymeleaf.org" 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 
-<title>Home Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HomePage</title>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+<!-- font -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
-<link href="../css/main.css" rel="stylesheet" type="text/css"/>
-</head>
+
+
+
+
+
+
+  </head>
 <body>
+
+	
+	
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -27,12 +37,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a th:href="@{/}"><span class="glyphicon glyphicon-home"></span>HOME</a></li>
         <li><a th:href="@{/quadri}"><span class="glyphicon glyphicon-th"></span>LISTA QUADRI</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoQuadro}"><span class="glyphicon glyphicon-picture"></span>INSERIMENTO QUADRO</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoAutore}"><span class="glyphicon glyphicon-pencil"></span>INSERIMENTO AUTORE</a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="@{/formQuadro}"><span class="glyphicon glyphicon-picture"></span>INSERIMENTO QUADRO</a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="@{/formAutore}"><span class="glyphicon glyphicon-pencil"></span>INSERIMENTO AUTORE</a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="@{/logout}"><span class="glyphicon glyphicon-off"></span>LOGOUT</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
 
 <!--  div che funga da contenitore di tutti gli elementi del carousel e che deve avere le classi carousel e slide. -->
 	<div id="mioCarousel" class="carousel slide">
@@ -56,21 +68,21 @@
 			<div class="carousel-inner">
 				<div class="item active">
 					<!-- Set the first background image using inline CSS below. -->
-					<img src="../img/index1.jpg" width="100%" />
+					<img src="../img/pennelli.jpg" width="100%" />
 					
 				
 			</div>
 
 				<div class="item">
 					<!-- Set the second background image using inline CSS below. -->
-					<img src="../img/index2.jpg" width="100%" />
+					<img src="../img/pennelli.jpg" width="100%" />
 					
 					
 				</div>
 
 				<div class="item">
 					<!-- Set the third background image using inline CSS below. -->
-					<img src="../img/index3.jpg" width="100%" />
+					<img src="../img/penneli.jpg" width="100%" />
 										
 				</div>
 
@@ -95,17 +107,10 @@
   <p><em>BENVENUTO NELLA NOSTRA GALLERIA!</em></p>
   <p>Potrai accedere a una pletora di immagini da gustare con gli occhi</p>
   <div class="ingresso">
-  <form th:action="@{/login}" method="get">
+  <form th:action="@{/hello}" method="get">
 		<input class="btn" type="submit" value="Entra" />
 	</form>
-	  </div>
-	  
-	        <div sec:authorize="isAuthenticated()">
-        <form th:action="@{/logout}" method="post">
-            <input class="btn" type="submit" value="Sign Out"/>
-        </form>
-        </div>
-
+  </div>
   <div class="row">
   <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>
   <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>

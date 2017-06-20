@@ -2,9 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Nuovo Autore</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
+<link href="../css/main.css" rel="stylesheet" type="text/css"/>
 </head>
-    <body>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Galleria</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/}"><span class="glyphicon glyphicon-home"></span>HOME</a></li>
+        <li><a th:href="@{/quadri}"><span class="glyphicon glyphicon-th"></span>LISTA QUADRI</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoQuadro}"><span class="glyphicon glyphicon-picture"></span>INSERIMENTO QUADRO</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+	<div  class="container text-center">
+	  <div class="page-header">
+		<h1 class="italic">Inserire il nuovo autore :</h1>
+		</div>
         <form action="#" th:action="@{/inserimentoAutore}" th:object="${autore}" method="post">
             <div>
             
@@ -35,20 +62,9 @@
                 </div>
                 </div>
                 <div>
-                <input type="submit" value="Inserisci nuovo autore"/>
+                <input type="submit"  class="btn" value="Inserisci nuovo autore"/>
                 </div>
         </form>
-        <form th:action="@{/}" th:method="get">
-	<input type="submit" value="Torna alla pagina iniziale"/>
-	</form>
-	<form th:action="@{/quadri}" th:method="get">
-	<input type="submit" value="Torna alla lista delle opere"/>
-	</form>
-        <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-        
-        </div>
+   </div>
     </body>
 </html>

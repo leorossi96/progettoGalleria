@@ -2,10 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Nuovo Quadro</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
+<link href="../css/main.css" rel="stylesheet" type="text/css"/>
 </head>
-    <body>
-   <div th:if="${modifica!=null}">
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Galleria</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/}"><span class="glyphicon glyphicon-home"></span>HOME</a></li>
+        <li><a th:href="@{/quadri}"><span class="glyphicon glyphicon-th"></span>LISTA QUADRI</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoAutore}"><span class="glyphicon glyphicon-pencil"></span>INSERIMENTO AUTORE</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+   <div th:if="${modifica!=null}"  class="container text-center">
+   <div class="page-header">
+		<h1 class="italic">Modificare il quadro :</h1>
+		</div>
      <form action="#" th:action="@{/modifica}" th:object="${quadroModificato}" method="post">
             <div>
             <input type="hidden" th:value="*{id}"/>
@@ -27,18 +54,20 @@
                 <div>
                     <span>Autore : </span>
                 <select name = "autoreScelto" id="autoUpdate" class="autoUpdate">
-					<option value="" th:disabled = "true" th:selected="true" th:text="Autore precedente : ${quadro.autore}">Seleziona un autore...</option>
+					<option value="" th:disabled = "true" th:selected="true" th:text="Autore precedente : ${quadro.autore}">Seleziona un autore o inseriscine uno nuovo</option>
 					<option th:each="autore : ${autori}" th:text = "${autore.nome} + ' ' + ${autore.cognome}" th:value = "${autore.id}"/>
 				</select>
-				<a th:href="@{/inserimentoAutore}">Inserisci un nuovo autore</a>
                 </div>
                 <div>
-                <input type="submit" value="Esegui modifica quadro"/>
+                <input  class="btn" type="submit" value="Esegui modifica quadro"/>
                 </div>
             </div>
         </form>
     </div> 
-     <div th:unless="${modifica!=null}">
+     <div th:unless="${modifica!=null}"  class="container text-center">
+     <div class="page-header">
+		<h1 class="italic">Inserire il nuovo quadro :</h1>
+		</div>
         <form action="#" th:action="@{/inserimentoQuadro}" th:object="${quadro}" method="post">
             <div>
                 <div>
@@ -64,29 +93,20 @@
                 <div>
                     <span>Autore : </span>
                 <select name = "autore" id="autoUpdate" class="autoUpdate">
-					<option value="" th:disabled = "true" th:selected="true">Seleziona un autore...</option>
-					<option th:each="autore : ${autori}" th:text = "${autore.nome} + ' ' + ${autore.cognome}" th:value = "${autore.id}"/>
+					<option value="" th:disabled = "true" th:selected="true">Seleziona un autore o inseriscine uno nuovo</option>
+					<option th:each="autore : ${autori}" th:text = "${autore.nome} + ' ' + ${autore.cognome}" th:value = "${autore.id}"></option>
 				</select>
-				 <a th:href="@{/inserimentoAutore}">Inserisci un nuovo autore</a> 
 				 <span th:text="${messaggio}"></span>
                 </div>
                 <input type="hidden" value="${quadro.autore.id}" th:field="*{id}" name="id"/>
                 <div>
-                <input type="submit" value="Inserisci nuovo quadro"/>
+                <input class="btn" type="submit" value="Inserisci nuovo quadro"/>
                 </div>
             </div>
         </form>
-        <form th:action="@{/}" th:method="get">
-	<input type="submit" value="Torna alla pagina iniziale"/>
-	</form>
-	<form th:action="@{/quadri}" th:method="get">
-	<input type="submit" value="Torna alla lista delle opere"/>
-	</form>
-        <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <input class="btn" type="submit" value="Sign Out"/>
         </form>
-        </div>
        </div>
     </body>
 </html>
