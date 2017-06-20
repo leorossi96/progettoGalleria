@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	xmlns:tiles="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Quadri nella galleria</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HomePage</title>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
+
+
 </head>
+
 <body>
 	<h1>Questi sono i quadri presenti nella galleria:</h1>
 
 
-<div sec:authorize="isAuthenticated()">
-  This content is only shown to authenticated users.
-</div>
 
+  <div class="row text-center">
+  <div class="col-sm-4">
+    <div class="thumbnail">
+      <img src="../img/pennelli.jpg" alt="Paris"/>
+      <p><strong>Paris</strong></p>
+      <p>Fri. 27 November 2015</p>
+      <button class="btn">Buy Tickets</button>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="thumbnail">
+      <img src="../img/pennelli.jpg" alt="New York"/>
+      <p><strong>New York</strong></p>
+      <p>Sat. 28 November 2015</p>
+      <button class="btn">Buy Tickets</button>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="thumbnail">
+      <img src="../img/pennelli.jpg" alt="San Francisco"/>
+      <p><strong>San Francisco</strong></p>
+      <p>Sun. 29 November 2015</p>
+      <button class="btn">Buy Tickets</button>
+    </div>
+  </div>
+</div>
 
 	<form th:action="@{/quadriPerAutore}" th:method="get">
 		<select name="autoreScelto" id="autoUpdate" class="autoUpdate">
