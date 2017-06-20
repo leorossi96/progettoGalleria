@@ -6,12 +6,23 @@
 <title>HomePage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
 
-<link href="../css/index.css" rel="stylesheet" />
-</head>
+
+
 
 
 <style>
+body {
+    font: 400 15px/1.8 Lato, sans-serif;
+    color: #777;
+}
+
+.navbar {
+    font-family: Montserrat, sans-serif;
+}
 /* Add a dark background color with a little bit see-through */ 
 .navbar {
     margin-bottom: 0;
@@ -95,9 +106,41 @@
     .container {
     padding: 80px 120px;
 }
-.form_entra{
-padding_bottom: 30px;}
+.ingresso{
+    padding: 80px 120px;
+}
+/* Black buttons with extra padding and without rounded borders */
+.btn {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #f1f1f1;
+    border-radius: 0;
+    transition: .2s;
+}
+
+/* On hover, the color of .btn will transition to white with black text */
+.btn:hover, .btn:focus {
+    border: 1px solid #333;
+    background-color: #fff;
+    color: #000;
+}
+/* Add a dark background color to the footer */
+footer {
+    background-color: #2d2d30;
+    color: #f5f5f5;
+    padding: 32px;
+}
+
+footer a {
+    color: #f5f5f5;
+}
+
+footer a:hover {
+    color: #777;
+    text-decoration: none;
+}
   </style>
+  </head>
 <body>
 
 	
@@ -115,10 +158,9 @@ padding_bottom: 30px;}
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#band">BAND</a></li>
-        <li><a href="#tour">TOUR</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+        <li><a href="#index">HOME</a></li>
+        <li><a href="#">CONTACT US</a></li>
+        
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
             <span class="caret"></span>
@@ -196,19 +238,22 @@ padding_bottom: 30px;}
   <h1>GALLERIA D'ARTE</h1>
   <p><em>BENVENUTO NELLA NOSTRA GALLERIA!</em></p>
   <p>Potrai accedere a una pletora di immagini da gustare con gli occhi</p>
-  
-  <form class="form_entra" th:action="@{/login}" method="get">
-		<input type="submit" value="Entra" />
+  <div class="ingresso">
+  <form th:action="@{/login}" method="get">
+		<input class="btn" type="submit" value="Entra" />
 	</form>
-  
+  </div>
   <div class="row">
   <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>
   <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>
   <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>
 	</div>
 		
-</div>		
-		
+</div>	
+<!-- Footer -->
+<footer class="text-center">
+  <a href="index">Visita il nostro sito</a>
+</footer>			
 
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
