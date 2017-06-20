@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:tiles="http://www.thymeleaf.org">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,78 +11,148 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
 
-
+<style type="text/css">
+.btn_1{
+padding: 0px 0px;
+background-color: #ffffff;
+      color: #000000;}
+</style>
 </head>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Galleria</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/}"><span class="glyphicon glyphicon-home"></span>HOME</a></li>
+        <li><a th:href="@{/quadri}"><span class="glyphicon glyphicon-th"></span>LISTA QUADRI</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoQuadro}"><span class="glyphicon glyphicon-picture"></span>INSERIMENTO QUADRO</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoAutore}"><span class="glyphicon glyphicon-pencil"></span>INSERIMENTO AUTORE</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<body>
+<div class="container text-center">
 	<h1>Questi sono i quadri presenti nella galleria:</h1>
-
-
-
-  <div class="row text-center">
-  <div class="col-sm-4">
-    <div class="thumbnail">
-      <img src="../img/pennelli.jpg" alt="Paris"/>
-      <p><strong>Paris</strong></p>
-      <p>Fri. 27 November 2015</p>
-       <button class="btn">Buy Tickets</button>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="thumbnail">
-      <img src="../img/pennelli.jpg" alt="New York"/>
-      <p><strong>New York</strong></p>
-      <p>Sat. 28 November 2015</p>
-      <button class="btn">Buy Tickets</button>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="thumbnail">
-      <img src="../img/pennelli.jpg" alt="San Francisco"/>
-      <p><strong>San Francisco</strong></p>
-      <p>Sun. 29 November 2015</p>
-      <button class="btn">Dettagk</button>
-    </div>
-  </div>
 </div>
-
-	<form th:action="@{/quadriPerAutore}" th:method="get">
+<body class="bg-1">
+<div class="container text-center">
+<form  th:action="@{/quadriPerAutore}" th:method="get">
 		<select name="autoreScelto" id="autoUpdate" class="autoUpdate">
 			<option value="" th:disabled="true" th:selected="true">Seleziona
 				un autore...</option>
 			<option th:each="autore : ${autori}"
 				th:text="${autore.nome} + ' ' + ${autore.cognome}"
 				th:value="${autore.id}" />
-		</select> <input type="submit" value="Trova quadri di questo autore" />
+		</select> <input class="btn_1" type="submit" value="Trova quadri di questo autore" />
 	</form>
 	<form th:action="@{/quadriPerAnno}" th:method="get">
-		<input type="text" name="anno"
-			placeholder="inserisci l'anno per cercare i quadri" /> <input
+		<input  type="text" name="anno"
+			placeholder="inserisci l'anno per cercare i quadri" /> <input class="btn_1"
 			type="submit" value="Trova quadri di questo anno" />
 	</form>
 	<form th:action="@{/quadriPerTecnica}" th:method="get">
-		<input type="text" name="tecnica"
-			placeholder="inserisci la tecnica per cercare i quadri" /> <input
+		<input  type="text" name="tecnica"
+			placeholder="inserisci la tecnica per cercare i quadri" /> <input class="btn_1"
 			type="submit" value="Trova quadri con questa tecnica" />
 	</form>
-	<ul>
-		<li th:each="quadro : ${quadri}"><a
-			th:href="@{/dettagliQuadro(id=${quadro.id})}"
-			th:text="${quadro.titolo}"></a>
-			<div sec:authorize="isAuthenticated()">
-					<a th:href="@{/modifica(quadroDaModificare=${quadro.id})}">Modifica</a>
-					 <a th:href="@{/cancella(quadroDaCancellare=${quadro.id})}">Cancella</a>
-					 </div>
-			</li>
-	</ul>
-	<div sec:authorize="isAuthenticated()">
+</div>
+
+
+
+<div class="row text-center">
+<ul>
+ <li th:each="quadro : ${quadri}">
+ <div class="col-sm-4">
+    <div class="thumbnail">
+    <img src="../img/index1.jpg" alt="Paris"/>
+    <p><strong><span th:text="${quadro.titolo}"></span></strong></p>
+    <p><strong><span th:text="${quadro.anno}"></span></strong></p>
+    
+	<a class="btn" th:href="@{/dettagliQuadro(id=${quadro.id})}"><span>Dettagli</span></a> 
+      
+    </div>
+  </div>
+  </li>
+  
+  
+   <li th:each="quadro : ${quadri}">
+ <div class="col-sm-4">
+    <div class="thumbnail">
+    <img src="../img/index2.jpg" alt="Paris"/>
+    <p><strong><span th:text="${quadro.titolo}"></span></strong></p>
+    <p><strong><span th:text="${quadro.anno}"></span></strong></p>
+    
+	<a class="btn" th:href="@{/dettagliQuadro(id=${quadro.id})}"><span>Dettagli</span></a> 
+      
+    </div>
+  </div>
+  </li>
+    
+   <li th:each="quadro : ${quadri}">
+ <div class="col-sm-4">
+    <div class="thumbnail">
+    <img src="../img/index1.jpg" alt="Paris"/>
+    <p><strong><span th:text="${quadro.titolo}"></span></strong></p>
+    <p><strong><span th:text="${quadro.anno}"></span></strong></p>
+    
+	<a class="btn" th:href="@{/dettagliQuadro(id=${quadro.id})}"><span>Dettagli</span></a> 
+      
+    </div>
+  </div>
+  </li>
+  
+   <li th:each="quadro : ${quadri}">
+ <div class="col-sm-4">
+    <div class="thumbnail">
+    <img src="../img/index3.jpg" alt="Paris"/>
+    <p><strong><span th:text="${quadro.titolo}"></span></strong></p>
+    <p><strong><span th:text="${quadro.anno}"></span></strong></p>
+    
+	<a class="btn" th:href="@{/dettagliQuadro(id=${quadro.id})}"><span>Dettagli</span></a> 
+      
+    </div>
+  </div>
+  </li>
+  
+   <li th:each="quadro : ${quadri}">
+ <div class="col-sm-4">
+    <div class="thumbnail">
+    <img src="../img/index2.jpg" alt="Paris"/>
+    <p><strong><span th:text="${quadro.titolo}"></span></strong></p>
+    <p><strong><span th:text="${quadro.anno}"></span></strong></p>
+    
+	<a class="btn" th:href="@{/dettagliQuadro(id=${quadro.id})}"><span>Dettagli</span></a> 
+      
+    </div>
+  </div>
+  </li>
+  
+</ul>
+</div>
+<div class="container text-center" sec:authorize="isAuthenticated()">
+	
 		<a href="/inserimentoQuadro">Inserisci un quadro alla galleria</a>
 		
 	
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" />
-		</form>
+		<div class="form-actions">
+				<button type="submit" class="btn">Log in</button>
+			</div>
 		</div>
+
+
+
+
+	
+	
+	
 	
 </body>
 </html>
