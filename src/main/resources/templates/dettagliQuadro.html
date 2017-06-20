@@ -29,8 +29,8 @@
         <li><a th:href="@{/quadri}"><span class="glyphicon glyphicon-th"></span>LISTA QUADRI</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoQuadro}"><span class="glyphicon glyphicon-picture"></span>INSERIMENTO QUADRO</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/inserimentoAutore}"><span class="glyphicon glyphicon-pencil"></span>INSERIMENTO AUTORE</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/modifica(quadroDaModificare=${quadro.id})}"><span class="glyphicon glyphicon-pencil"></span>MODIFICA</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/cancella(quadroDaCancellare=${quadro.id})}"><span class="glyphicon glyphicon-pencil"></span>CANCELLA</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/modifica(quadroDaModificare=${quadro.id})}"><span class="glyphicon glyphicon-edit"></span>MODIFICA</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/cancella(quadroDaCancellare=${quadro.id})}"><span class="glyphicon glyphicon-trash"></span>CANCELLA</a></li>
       </ul>
     </div>
   </div>
