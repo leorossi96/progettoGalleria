@@ -22,7 +22,7 @@ import it.uniroma3.service.QuadroService;
 import it.uniroma3.service.AutoreService;
 
 @Controller
-public class QuadroController {
+public class CRUDController {
 
 
 	@Autowired
