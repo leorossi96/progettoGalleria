@@ -1,13 +1,221 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head> 
-<title>Pagina iniziale della galleria</title>
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title>HomePage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link href="../css/index.css" rel="stylesheet" />
 </head>
+
+
+<style>
+/* Add a dark background color with a little bit see-through */ 
+.navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity:0.9;
+}
+
+/* Add a gray color to all navbar links */
+.navbar li a, .navbar .navbar-brand { 
+    color: #d5d5d5 !important;
+}
+
+/* On hover, the links will turn white */
+.navbar-nav li a:hover {
+    color: #fff !important;
+}
+
+/* The active link */
+.navbar-nav li.active a {
+    color: #fff !important;
+    background-color:#29292c !important;
+}
+
+/* Remove border color from the collapsible button */
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+
+/* Dropdown */
+.open .dropdown-toggle {
+    color: #fff ;
+    background-color: #555 !important;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    color: #000 !important;
+}
+
+/* On hover, the dropdown links will turn red */
+.dropdown-menu li a:hover {
+    background-color: red !important;
+}
+.container {
+    padding: 80px 120px;
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    .container {
+    padding: 80px 120px;
+}
+.form_entra{
+padding_bottom: 30px;}
+  </style>
 <body>
-	<h1>Benvenuto nella galleria</h1>
-	<form th:action="@{/hello}" method="get">
+
+	
+	
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#band">BAND</a></li>
+        <li><a href="#tour">TOUR</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Merchandise</a></li>
+            <li><a href="#">Extras</a></li>
+            <li><a href="#">Media</a></li> 
+          </ul>
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!--  div che funga da contenitore di tutti gli elementi del carousel e che deve avere le classi carousel e slide. -->
+	<div id="mioCarousel" class="carousel slide">
+
+		<!-- Una lista di elementi vuoti che costituiranno gli indicatori 
+		che segnalano all'utente quanti sono gli elementi del carosuel e qual'� quello attualmente visualizzato. -->
+		<ol class="carousel-indicators">
+			<li data-target="#mioCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#mioCarousel" data-slide-to="1"></li>
+			<li data-target="#mioCarousel" data-slide-to="2"></li>
+		</ol>
+			<!-- Una lista di elementi vuoti che costituiranno gli indicatori 
+		che segnalano all'utente quanti sono gli elementi del carosuel e qual e' quello attualmente visualizzato. -->
+			<ol class="carousel-indicators">
+				<li data-target="#mioCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#mioCarousel" data-slide-to="1"></li>
+				<li data-target="#mioCarousel" data-slide-to="2"></li>
+			</ol>
+
+
+			<div class="carousel-inner">
+				<div class="item active">
+					<!-- Set the first background image using inline CSS below. -->
+					<img src="../img/pennelli.jpg" width="100%" />
+					
+				
+			</div>
+
+				<div class="item">
+					<!-- Set the second background image using inline CSS below. -->
+					<img src="../img/pennelli.jpg" width="100%" />
+					
+					
+				</div>
+
+				<div class="item">
+					<!-- Set the third background image using inline CSS below. -->
+					<img src="../img/penneli.jpg" width="100%" />
+										
+				</div>
+
+			</div>
+
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#mioCarousel"
+				data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#mioCarousel"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+		
+		
+<div class="container text-center">
+  <h1>GALLERIA D'ARTE</h1>
+  <p><em>BENVENUTO NELLA NOSTRA GALLERIA!</em></p>
+  <p>Potrai accedere a una pletora di immagini da gustare con gli occhi</p>
+  
+  <form class="form_entra" th:action="@{/login}" method="get">
 		<input type="submit" value="Entra" />
 	</form>
+  
+  <div class="row">
+  <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>
+  <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>
+  <div class="col-sm-4"><p><strong>Name</strong></p><p>Il testo è il seguente (anche se ne esistono diverse versioni): « Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p></div>
+	</div>
+		
+</div>		
+		
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+ 
+
 </body>
-</html>
+</html> 
