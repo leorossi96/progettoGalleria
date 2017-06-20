@@ -33,7 +33,7 @@ body {
     background-color:#29292c !important;
 }
 
-/* Remove border color from the collapsible button */
+ /* Remove border color from the collapsible button */
 .navbar-default .navbar-toggle {
     border-color: transparent;
 }
