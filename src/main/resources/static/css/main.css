@@ -30,7 +30,7 @@ body {
 /* The active link */
 .navbar-nav li.active a {
     color: #fff !important;
-    background-color:#29292c !important;
+     background-color:#29292c !important;
 }
 
  /* Remove border color from the collapsible button */
